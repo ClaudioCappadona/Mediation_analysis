@@ -243,7 +243,7 @@ res_gform <- cmest(
   #intermediate = c("DIAB_GRA", "HYPERTENSIE_QUEST", "PARITY", "WEIGHT_0"),  
   postc = L_matrix,
   mreg = list("linear"),
-  postcreg = list("logistic","logistic","ordinal","linear", rep("linear", length(setdiff(colnames(metabol_cluster), module)))) %>% flatten(), #consider different distrib for BMI_0 since it's not linear
+  postcreg = L_matrix_reg, #consider different distrib for BMI_0 since it's not linear
   yreg = "linear",
   astar = a0,
   a = a1,
@@ -275,7 +275,7 @@ while(sum(mediation_summary$summarydf$P.val == 0) > 0 &&
       basec = covariates,
       postc = L_matrix, #change to BMI_0 or later if missing, see notes
       mreg = list("linear"),
-      postcreg = list("logistic","logistic","ordinal","linear", rep("linear", length(setdiff(colnames(metabol_cluster), module)))) %>% flatten(), #consider different distrib for BMI_0 since it's not linear
+      postcreg = L_matrix_reg, #consider different distrib for BMI_0 since it's not linear
       yreg = "linear",
       astar = a0,
       a = a1,

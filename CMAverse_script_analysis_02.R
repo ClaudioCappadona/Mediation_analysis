@@ -200,7 +200,7 @@ CMAverse_res <- {}
                        
                 #analys_df_complete <- analys_df_complete[1:10,]
                 
-                for(L_matrix in c("conditional","not_conditional")){
+                for(conditional in c("conditional","not_conditional")){
 
 
 if(treatment == "quantile25vs75"){
@@ -291,7 +291,7 @@ while(sum(mediation_summary$summarydf$P.val == 0) > 0 &&
 
 df <- data.frame(
   Package = "CMAverse with intermediate",
-  Conditional = L_matrix,
+  Conditional = conditional,
   Exposure = exposure,
   Treatment = treatment,
   Cluster = module,

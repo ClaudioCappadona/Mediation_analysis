@@ -219,7 +219,7 @@ if(treatment == "minVSmax"){
 }    
 
 if(conditional == "conditional"){
-    L_matrix <- c(intermediate_confounders,  setdiff(colnames(metabol_cluster), module) %>% as.vector())
+    L_matrix <- c(intermediate_confounders,  setdiff(colnames(metabol_cluster %>% dplyr::select(-ID_var)), module) %>% as.vector())
     L_matrix_reg <- list("logistic","logistic","ordinal","linear", rep("linear", length(setdiff(colnames(metabol_cluster %>% dplyr::select(-ID_var)), module)))) %>% flatten()
 } else if(conditional == "not_conditional"){
     L_matrix <- c(intermediate_confounders)

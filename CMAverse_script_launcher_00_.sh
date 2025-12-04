@@ -17,9 +17,9 @@ mod_sizes="14"
 #MEDissThress="0.25 0.4"
 cohorts=""
 
-treatments = "quantile10vs90 quantile25vs75 minVSmax"
+treatments ="quantile10vs90 quantile25vs75 minVSmax"
 
-workdir= ""
+workdir=""
 
 
 source activate mediation
@@ -31,7 +31,7 @@ mkdir -p ${workdir}/${cohort}
 
 
 WGCNA_params () {
-Rscript --no-save --no-restore --verbose $workdir/CC_CMAverse_script_WGCNA_parameters_01.R\ 
+Rscript --no-save --no-restore --verbose $workdir/CMAverse_script_WGCNA_parameters_01.R\ 
                 --workdir=${workdir}/ \
                 --cohort=$cohort \
                 --outfolder=${workdir}/${cohort}/ \
@@ -48,7 +48,7 @@ CMAverse_analysis () {
                 #for MEDissThres in $MEDissThress; do
 
 
-        Rscript --no-save --no-restore --verbose $workdir/CC_CMAverse_script_analysis_02.R\
+        Rscript --no-save --no-restore --verbose $workdir/CMAverse_script_analysis_02.R\
                 --workdir="${workdir}/" \
                 --cohort="$cohort" \
                 --outfolder="${workdir}/${cohort}/" \

@@ -94,7 +94,7 @@ reduced_Omics <<- OmicsReduction(dataframe = omicsDF_ID_log_IQR %>% dplyr::selec
 # Users can choose freely to use principal() instead of prcomp() to perform PCA.The result should be very similar, but principal() allows more functionalities
                                    first_PC = 1,
                                    second_PC= 2,
-                                   option = dim_reduc_meth,
+                                   option = "WGCNA",
 # In this example we use WGCNA to perform data reduction, therefore specifying `option="WGCNA"`.
                                    scale = F,
                                    center = F,
@@ -220,8 +220,10 @@ if(treatment == "minVSmax"){
 
 if(conditional == "conditional"){
     L_matrix <- c(intermediate_confounders,  setdiff(colnames(metabol_cluster), module) %>% as.vector())
+    L_matrix_reg <- list("logistic","logistic","ordinal","linear", rep("linear", length(setdiff(colnames(metabol_cluster), module)))) %>% flatten()
 } else if(conditional == "not_conditional"){
     L_matrix <- c(intermediate_confounders)
+    L_matrix_reg <-list("logistic","logistic","ordinal","linear")
 }
                 
 n_sim <- 10          

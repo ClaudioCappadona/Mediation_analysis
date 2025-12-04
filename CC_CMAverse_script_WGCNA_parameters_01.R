@@ -176,7 +176,7 @@ reduced_Omics <<- OmicsReduction(dataframe = omicsDF_ID_log_IQR %>% dplyr::selec
 # Users can choose freely to use principal() instead of prcomp() to perform PCA.The result should be very similar, but principal() allows more functionalities
                                    first_PC = 1,
                                    second_PC= 2,
-                                   option = dim_reduc_meth,
+                                   option = "WGCNA",
 # In this example we use WGCNA to perform data reduction, therefore specifying `option="WGCNA"`.
                                    scale = F,
                                    center = F,

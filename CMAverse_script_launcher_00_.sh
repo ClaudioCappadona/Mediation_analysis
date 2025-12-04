@@ -17,7 +17,7 @@ mod_sizes="14"
 #MEDissThress="0.25 0.4"
 cohorts=""
 
-treatments ="quantile10vs90 quantile25vs75 minVSmax"
+treatments="quantile10vs90 quantile25vs75 minVSmax"
 
 workdir=""
 
@@ -44,7 +44,7 @@ wait
 CMAverse_analysis () {
 #for deepSplit in $deepSplit_values; do
         for num in $mod_sizes; do
-        	for treatment in treatments; do
+        	for treatment in $treatments; do
                 #for MEDissThres in $MEDissThress; do
 
 

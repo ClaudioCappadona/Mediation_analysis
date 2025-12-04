@@ -104,7 +104,7 @@ reduced_Omics <<- OmicsReduction(dataframe = omicsDF_ID_log_IQR %>% dplyr::selec
 # This argument is inherited from the principal() function
                                    #size_variable = auxilary2$FastingGlucose,
                                    #size_variable_name = "FastigGlucose",
-                                   color_variable = covariatesDF[["GENDER"]],
+                                   color_variable = covariatesDF_ID[["GENDER"]],
                                    color_variable_name = "Gender",
                                    #shape_variable = auxilary2$PhysicalActivityIndex,
                                    #shape_variable_name = "PhysicalActivityIndex",

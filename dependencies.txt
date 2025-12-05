@@ -1,0 +1,15 @@
+wget https://www.bioconductor.org/packages/release/bioc/src/contrib/impute_1.84.0.tar.gz
+wget https://bioconductor.org/packages/release/bioc/src/contrib/preprocessCore_1.72.0.tar.gz
+wget https://bioconductor.org/packages/release/bioc/src/contrib/BiocGenerics_0.56.0.tar.gz
+wget https://bioconductor.org/packages/release/bioc/src/contrib/Biobase_2.70.0.tar.gz
+wget https://bioconductor.org/packages/release/bioc/src/contrib/IRanges_2.44.0.tar.gz
+wget https://bioconductor.org/packages/release/bioc/src/contrib/S4Vectors_0.48.0.tar.gz
+wget https://bioconductor.org/packages/release/bioc/src/contrib/XVector_0.50.0.tar.gz
+wget https://bioconductor.org/packages/release/bioc/src/contrib/Biostrings_2.78.0.tar.gz
+wget https://www.bioconductor.org/packages/release/bioc/src/contrib/KEGGREST_1.50.0.tar.gz
+wget https://bioconductor.org/packages/release/bioc/src/contrib/AnnotationDbi_1.72.0.tar.gz
+wget https://cran.r-project.org/src/contrib/WGCNA_1.73.tar.gz
+wget https://cran.r-project.org/src/contrib/findpython_1.0.9.tar.gz
+wget https://cran.r-project.org/src/contrib/argparse_2.3.1.tar.gz
+
+#Then for each of them, in this order, run R CMD INSTALL xxxxx.tar.gz

@@ -87,7 +87,9 @@ MEDissThres <- 0.4
     
     
 enableWGCNAThreads(nThreads = max_cores)
-    
+
+set.seed(42)
+
 reduced_Omics <<- OmicsReduction(dataframe = omicsDF_ID_log_IQR %>% dplyr::select(-ID_var),
                                    plottype = c("scree","score","loading","scoreloading"),
                                    pc_type = "principal", 
@@ -178,7 +180,7 @@ CMAverse_res <- {}
 #       .export = c("metabol_cluster", "exposuresDF")
 #       ) %do% {
     
-    
+set.seed(42)    
 #for (treatment in c("minVSmax", "quantile25vs75")){ #, "quantile10vs90")){
     
     #foreach(exposure = colnames(exposuresDF)[1]) %dopar% {
@@ -230,7 +232,8 @@ n_sim <- 10
 #n_sim <- 101
 max_iterations <- 5
 iteration <- 1
-
+set.seed(42)
+                    
 res_gform <- cmest(
   data = analys_df_complete,
   model = "gformula",
@@ -264,7 +267,8 @@ while(sum(mediation_summary$summarydf$P.val == 0) > 0 &&
     message("Cannot find non-zero p-value, running iteration n.", iteration, "...\n")
     n_sim <- n_sim * 10
     iteration <- iteration + 1
-    
+
+   set.seed(42) 
       res_gform <- cmest(
       data = analys_df_complete,
       model = "gformula",

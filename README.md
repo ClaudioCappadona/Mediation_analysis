@@ -1,6 +1,4 @@
-# LongITools cord blood metabolomics project
-## Analysis of pregnancy environmental exposures, cord blood metabolome and cardiometabolic outcomes at age 5
-
+# LongITools metabolomics project
 | col1   | col2 |
 | ----------- | ----------- |
 |       |     |

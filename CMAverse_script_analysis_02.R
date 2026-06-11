@@ -137,7 +137,7 @@ metabol_cluster <- cbind(omicsDF_ID_log_IQR %>% dplyr::select(all_of(ID_var)),me
 #registerDoParallel(cores = cl)
 
 CMAverse_res <- {}
-
+first_write <- TRUE
 
 #CMAverse_analysis <- function(){
 

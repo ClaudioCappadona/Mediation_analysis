@@ -200,6 +200,8 @@ reduced_Omics <<- OmicsReduction(dataframe = omicsDF_ID_log_IQR %>% dplyr::selec
                                    MEDissThres = MEDissThres
 # The mimimum number of variable in each cluster of WGCNA
 )
+
+WGCNA_results[[paste0("mod_size_", mod_size)]] <- reduced_Omics
     
 df <- data.frame(
     module_size = mod_size,

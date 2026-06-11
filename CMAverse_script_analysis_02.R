@@ -228,9 +228,9 @@ if(conditional == "conditional"){
     L_matrix_reg <-list("logistic","logistic","ordinal","linear")
 }
                 
-n_sim <- 10          
+n_sim <- 1001          
 #n_sim <- 101
-max_iterations <- 5
+max_iterations <- 3
 iteration <- 1
 set.seed(42)
                     
@@ -269,7 +269,8 @@ while(sum(mediation_summary$summarydf$P.val == 0) > 0 &&
     iteration <- iteration + 1
 
    set.seed(42) 
-      res_gform <- cmest(
+      res_gform <- tryCatch(
+      cmest(
       data = analys_df_complete,
       model = "gformula",
       outcome = outcome,
@@ -288,9 +289,13 @@ while(sum(mediation_summary$summarydf$P.val == 0) > 0 &&
       inference = "bootstrap",
       nboot = n_sim,
       boot.ci.type = "bca"
-      )
+      ),
+      error = function(e) NA )
+    if(sum(is.na(res_gform))==0){
     mediation_summary <- summary(res_gform)
-  } 
+    } else {
+        break
+    }
 
 
 df <- data.frame(
@@ -309,6 +314,12 @@ df <- data.frame(
 )
 
 CMAverse_res <- rbind(CMAverse_res, df)
+
+CMAverse_res <- rbind(CMAverse_res, df)
+
+write.table(x = df, file = paste0(outfolder, cohort, "_",treatment, "_CMAverse_intermediate_outcomes_res_modsize",mod_size,".tsv"), append = !first_write,  
+                quote = F, sep = "\t", row.names = F, col.names = first_write)
+first_write <- FALSE
     
    }#, mc.cores = 20)
   #}

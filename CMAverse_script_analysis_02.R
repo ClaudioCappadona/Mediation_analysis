@@ -234,7 +234,7 @@ max_iterations <- 3
 iteration <- 1
 set.seed(42)
                     
-res_gform <- cmest(
+res_gform <- tryCatch(cmest(
   data = analys_df_complete,
   model = "gformula",
   outcome = outcome,
@@ -257,7 +257,7 @@ res_gform <- cmest(
   #boot = TRUE,
   nboot = n_sim,
   boot.ci.type = "bca"
-)
+), error = function(e) NA )
 
 mediation_summary <- summary(res_gform)
 

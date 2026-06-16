@@ -259,7 +259,29 @@ res_gform <- tryCatch(cmest(
   boot.ci.type = "bca"
 ), error = function(e) NA )
 
-mediation_summary <- summary(res_gform)
+if(sum(is.na(res_gform))==0){
+    mediation_summary <- summary(res_gform)
+    } else {
+        df <- data.frame(
+      Package = "CMAverse with intermediate",
+      Conditional = conditional,
+      Exposure = exposure,
+      Treatment = treatment,
+      Cluster = module,
+      Outcome = outcome,
+      Effect = NA,
+      Estimate = NA,
+      Std.error = NA,
+      CI.Lower = NA,
+      CI.Upper = NA,
+      p.value = NA
+)
+        CMAverse_res <- rbind(CMAverse_res, df)
+        write.table(x = df, file = paste0(outfolder, cohort, "_",treatment, "_CMAverse_intermediate_outcomes_res_modsize",mod_size,".tsv"), append = !first_write,  
+                quote = F, sep = "\t", row.names = F, col.names = first_write)
+        first_write <- FALSE
+        break
+    }
 
                 
 while(sum(mediation_summary$summarydf$P.val == 0) > 0 && 
@@ -294,6 +316,24 @@ while(sum(mediation_summary$summarydf$P.val == 0) > 0 &&
     if(sum(is.na(res_gform))==0){
     mediation_summary <- summary(res_gform)
     } else {
+        df <- data.frame(
+      Package = "CMAverse with intermediate",
+      Conditional = conditional,
+      Exposure = exposure,
+      Treatment = treatment,
+      Cluster = module,
+      Outcome = outcome,
+      Effect = NA,
+      Estimate = NA,
+      Std.error = NA,
+      CI.Lower = NA,
+      CI.Upper = NA,
+      p.value = NA
+)
+        CMAverse_res <- rbind(CMAverse_res, df)
+        write.table(x = df, file = paste0(outfolder, cohort, "_",treatment, "_CMAverse_intermediate_outcomes_res_modsize",mod_size,".tsv"), append = !first_write,  
+                quote = F, sep = "\t", row.names = F, col.names = first_write)
+        first_write <- FALSE
         break
     }
 

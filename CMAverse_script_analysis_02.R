@@ -283,6 +283,7 @@ if(sum(is.na(res_gform))==0){
       CI.Lower = NA,
       CI.Upper = NA,
       p.value = NA,
+      modsize = mod_size,
       N_sample = nrow(analys_df_complete)
 )
         CMAverse_res <- rbind(CMAverse_res, df)
@@ -337,7 +338,9 @@ while(sum(mediation_summary$summarydf$P.val == 0) > 0 &&
       Std.error = NA,
       CI.Lower = NA,
       CI.Upper = NA,
-      p.value = NA
+      p.value = NA,
+      modsize = mod_size,
+      N_sample = nrow(analys_df_complete)
 )
         CMAverse_res <- rbind(CMAverse_res, df)
         write.table(x = df, file = paste0(outfolder, cohort, "_",treatment, "_CMAverse_intermediate_outcomes_res_modsize",mod_size,".tsv"), append = !first_write,  
@@ -360,7 +363,8 @@ df <- data.frame(
   CI.Lower = mediation_summary$summarydf$`95% CIL`,
   CI.Upper = mediation_summary$summarydf$`95% CIU`,
   p.value = mediation_summary$summarydf$P.val,
-  modsize = mod_size
+  modsize = mod_size,
+  N_sample = nrow(analys_df_complete)
 )
 
 CMAverse_res <- rbind(CMAverse_res, df)

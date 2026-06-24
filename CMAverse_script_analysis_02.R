@@ -84,7 +84,11 @@ ID_var <- "Id_metabolomicsChild"
 
 deepSplit <- 0
 MEDissThres <- 0.4
-    
+
+tryCatch({
+    metabol_cluster <- WGCNA_results[[paste0("mod_size_",mod_size)]]$object$scores %>% as.data.frame()
+}, error = function(msg){
+            return(msg)
     
 enableWGCNAThreads(nThreads = max_cores)
 
@@ -120,6 +124,7 @@ reduced_Omics <<- OmicsReduction(dataframe = omicsDF_ID_log_IQR %>% dplyr::selec
                                    MEDissThres = MEDissThres
 # The mimimum number of variable in each cluster of WGCNA
 )
+})
 
 # -
 
@@ -130,6 +135,9 @@ metabol_cluster <- cbind(omicsDF_ID_log_IQR %>% dplyr::select(all_of(ID_var)),me
 # ### CMAverse - intermediate confounders 
 
 # +
+library(CMAverse)
+seed <- 42
+set.seed(42)
 
 #library(doParallel)
 #registerDoParallel(cores = parallel::detectCores() - 1)
@@ -274,7 +282,8 @@ if(sum(is.na(res_gform))==0){
       Std.error = NA,
       CI.Lower = NA,
       CI.Upper = NA,
-      p.value = NA
+      p.value = NA,
+      N_sample = nrow(analys_df_complete)
 )
         CMAverse_res <- rbind(CMAverse_res, df)
         write.table(x = df, file = paste0(outfolder, cohort, "_",treatment, "_CMAverse_intermediate_outcomes_res_modsize",mod_size,".tsv"), append = !first_write,  
@@ -350,10 +359,9 @@ df <- data.frame(
   Std.error = mediation_summary$summarydf$Std.error,
   CI.Lower = mediation_summary$summarydf$`95% CIL`,
   CI.Upper = mediation_summary$summarydf$`95% CIU`,
-  p.value = mediation_summary$summarydf$P.val
+  p.value = mediation_summary$summarydf$P.val,
+  modsize = mod_size
 )
-
-CMAverse_res <- rbind(CMAverse_res, df)
 
 CMAverse_res <- rbind(CMAverse_res, df)
 
@@ -397,9 +405,9 @@ first_write <- FALSE
 
 # +
 
-write.xlsx(x = CMAverse_res, file = paste0(outfolder, cohort,"_",treatment, "_CMAverse_intermediate_outcomes_res_modsize",mod_size,".xlsx"))
-write.table(x = CMAverse_res, file = paste0(outfolder, cohort"_",treatment, "_CMAverse_intermediate_outcomes_res_modsize",mod_size,".tsv"), 
-                quote = F, sep = "\t", row.names = F, col.names = T)
+#write.xlsx(x = CMAverse_res, file = paste0(outfolder, cohort,"_",treatment, "_CMAverse_intermediate_outcomes_res_modsize",mod_size,".xlsx"))
+#write.table(x = CMAverse_res, file = paste0(outfolder, cohort"_",treatment, "_CMAverse_intermediate_outcomes_res_modsize",mod_size,".tsv"), 
+                #quote = F, sep = "\t", row.names = F, col.names = T)
 # -
 
 

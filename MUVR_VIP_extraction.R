@@ -62,19 +62,20 @@ mods <-  list.files(path = path, pattern = "rda",recursive = T, full.names = TRU
 
 mods
 
-mods <- grep("elapse|surf|O3",mods, value = T,invert = T)
+#different for each cohort
+#mods <- grep("elapse|surf|O3",mods, value = T,invert = T)
 
 report <- report(mods)
 
 report <- report %>% 
 select(model,q2_max,nVar_max) %>% mutate(model_name = recode(model,
-                          "stringent_GenR_birth_73_pm10_preg.rda" = "PM10",
-                          "stringent_GenR_birth_74_pm25_preg.rda" = "PM2.5",                       
-                          "stringent_GenR_birth_132_pm25abs_preg.rda" = "Black carbon",                     
-                          "stringent_GenR_birth_72_no2_preg.rda" = "NO2",
-                          "stringent_GenR_birth_125_hum_preg.rda" = "Humidity",
-                          "stringent_GenR_birth_122_tm_preg.rda" = "Temperature",
-                          "stringent_GenR_birth_119_uvdvc_preg.rda" = "UV"))
+                          "stringent_cohort_birth_73_pm10_preg.rda" = "PM10",
+                          "stringent_cohort_birth_74_pm25_preg.rda" = "PM2.5",                       
+                          "stringent_cohort_birth_132_pm25abs_preg.rda" = "Black carbon",                     
+                          "stringent_cohort_birth_72_no2_preg.rda" = "NO2",
+                          "stringent_cohort_birth_125_hum_preg.rda" = "Humidity",
+                          "stringent_cohort_birth_122_tm_preg.rda" = "Temperature",
+                          "stringent_cohort_birth_119_uvdvc_preg.rda" = "UV"))
 
 report
 

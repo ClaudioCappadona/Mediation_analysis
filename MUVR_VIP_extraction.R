@@ -1,4 +1,6 @@
-sessionInfo() #metabolomics
+#sessionInfo() #metabolomics
+
+### Code to extract MUVR VIP features ###
 
 library(dplyr)
 library(ggplot2)
@@ -62,12 +64,14 @@ mods <-  list.files(path = path, pattern = "rda",recursive = T, full.names = TRU
 
 mods
 
-#different for each cohort
+#different for each cohort, run it only if needed
 #mods <- grep("elapse|surf|O3",mods, value = T,invert = T)
 
 report <- report(mods)
 
 report <- report %>% 
+
+# for clearer exposure lists, also create model_name variable needed later
 select(model,q2_max,nVar_max) %>% mutate(model_name = recode(model,
                           "stringent_cohort_birth_73_pm10_preg.rda" = "PM10",
                           "stringent_cohort_birth_74_pm25_preg.rda" = "PM2.5",                       
@@ -80,16 +84,18 @@ select(model,q2_max,nVar_max) %>% mutate(model_name = recode(model,
 report
 
 path
-
-model_VIPs <- list()
+                       
+model_VIPs <- list() #creating new list to fill with exposure-associated VIPs
 for(i in 1:nrow(report)){
     load(paste0(path,report$model[i])) # new object will be called "mod"
-    
-    model_VIPs[[report$model_name[i]]] <- MUVR::getVIP(mod,model = "max")
+    #model_name should be the exposure name
+    model_VIPs[[report$model_name[i]]] <- MUVR::getVIP(mod,model = "max") #filling the list 
 }
 
+#optional visual check
 model_VIPs
 
+#saving the list as .rds object                     
 saveRDS(model_VIPs, paste0(outpath, "VIPs_stringent_models_test.rds"))
 
 
